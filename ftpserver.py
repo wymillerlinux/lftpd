@@ -1,7 +1,7 @@
 import os
 import sys
 import logging
-import setproctitle
+#import setproctitle
 from pyftpdlib.authorizers import UnixAuthorizer
 from pyftpdlib.handlers import FTPHandler
 from pyftpdlib.servers import MultiprocessFTPServer
@@ -70,7 +70,7 @@ def Interrupt():
         sys.exit(0)
 
 if os.name == 'posix':
-    authorizer = UnixAuthorizer(rejected_users=['root'])
+    authorizer = UnixAuthorizer()
 # Trying to get Windows to work...
 #elif os.name == 'nt':
 #    authorizer = WindowsAuthorizer()
@@ -87,7 +87,7 @@ handler.authorizer = authorizer
 
 while isRunning:
 
-    setproctitle.setproctitle("lftpd")
+    #setproctitle.setproctitle("lftpd")
     FTPLogInfo(("Starting Lame FTP service on ", bindport))
     print("Press Ctrl-C to stop the servicing!")
     server = MultiprocessFTPServer((bindip, bindport), handler)
